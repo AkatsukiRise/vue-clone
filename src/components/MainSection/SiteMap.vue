@@ -75,3 +75,4 @@ const { t } = useI18n()
   }
 }
 </style>
+
