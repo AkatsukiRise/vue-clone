@@ -4,9 +4,9 @@ import { platinumSponsors, goldSponsors } from '@/data.ts'
 <template>
   <section class="table-container">
     <h3>Platinum Sponsors</h3>
-      <div class="table-1">
-        <div v-for="sponsor in platinumSponsors"  class="table-cell">{{ sponsor }}</div>
-      </div>
+    <div class="table-1">
+      <div v-for="(sponsor, index) in platinumSponsors" :key="index" class="table-cell">{{ sponsor }}</div>
+    </div>
 
     <h3>Gold Sponsors</h3>
     <div class="table-2">
@@ -23,7 +23,7 @@ import { platinumSponsors, goldSponsors } from '@/data.ts'
 }
 
 .table-cell {
-  background-color:rgba(228, 228, 228, 0.226);
+  background-color: var(--table-cell-color);
   text-align: center;
   font-size: 18px;
   font-weight: bold;
@@ -34,9 +34,14 @@ import { platinumSponsors, goldSponsors } from '@/data.ts'
   cursor: pointer;
 }
 
+:root:has(option[id="theme-system"]:checked) .table-cell:hover,
+:root:has(option[id="theme-dark"]:checked) .table-cell:hover{
+  background-color: rgb(126, 126, 126);
+}
+
 .table-cell a {
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
   height: 100%;
   width: 100%;
 }

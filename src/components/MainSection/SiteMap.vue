@@ -1,14 +1,26 @@
 <script setup lang="ts">
 import { siteMapCategories } from '@/data.js'
+import { useI18n } from 'vue-i18n'
+
+
+const { t } = useI18n()
 </script>
+
 <template>
   <nav class="map">
     <div class="map-links">
-      <div v-for="category in siteMapCategories" :key="category.id" class="category">
-        <h4>{{ category.id }}</h4>
+      <div
+        v-for="category in siteMapCategories"
+        :key="category.id"
+        class="category"
+      >
+        <h4>{{ t(category.id) }}</h4>
         <ul>
-          <li v-for="link in category.links" :key="link.key">
-            <a href="#">{{ link.key }}</a>
+          <li
+            v-for="link in category.links"
+            :key="link.key"
+          >
+            <a href="#">{{ t(link.key) }}</a>
           </li>
         </ul>
       </div>
@@ -19,7 +31,7 @@ import { siteMapCategories } from '@/data.js'
 <style scoped>
 .map {
   width: 100%;
-  background:rgba(228, 228, 228, 0.226);
+  background: var(--secondary-bg-color);
 }
 
 .map-links {

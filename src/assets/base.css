@@ -1,26 +1,62 @@
-/*!* color palette from <https://github.com/vuejs/theme> *!*/
-/*:root {*/
-/*  --vt-c-white: #ffffff;*/
-/*  --vt-c-white-soft: #f8f8f8;*/
-/*  --vt-c-white-mute: #f2f2f2;*/
+:root {
+  color-scheme: light dark;
 
-/*  --vt-c-black: #181818;*/
-/*  --vt-c-black-soft: #222222;*/
-/*  --vt-c-black-mute: #282828;*/
+  --dark-bg: #1A1A1A;
+  --light-bg: #ffffff;
+  --bg: light-dark(var(--light-bg), var(--dark-bg));
 
-/*  --vt-c-indigo: #2c3e50;*/
+  --dark-text: #e0e0e0;
+  --light-text: rgba(33, 53, 71, 1);
+  --text-color: light-dark(var(--light-text), var(--dark-text));
 
-/*  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);*/
-/*  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);*/
-/*  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);*/
-/*  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);*/
+  --dark-border: rgb(96, 96, 96);
+  --light-border: #d5d5d5;
+  --border-color: light-dark(var(--light-border), var(--dark-border));
 
-/*  --vt-c-text-light-1: var(--vt-c-indigo);*/
-/*  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);*/
-/*  --vt-c-text-dark-1: var(--vt-c-white);*/
-/*  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);*/
-/*}*/
+  --dark-button-text: #aac8e4;
+  --light-button-text: #8d8d8d;
+  --button-text-color: light-dark(var(--light-button-text), var(--dark-button-text));
 
+  --dark-highlight: #4caf50;
+  --light-highlight: #42d392;
+  --highlight-color: light-dark(var(--light-highlight), var(--dark-highlight));
+
+  --dark-secondary-bg: #242424;
+  --light-secondary-bg: #eeeeee;
+  --secondary-bg-color: light-dark(var(--light-secondary-bg), var(--dark-secondary-bg));
+
+  --dark-button-linear: #2f2f2f;
+  --light-button-linear: #f1f1f1;
+  --button-linear: light-dark(var(--light-button-linear), var(--dark-button-linear));
+
+  --dark-button-hover-main: #2F2F2F;
+  --light-button-hover-main: #d5d5d5;
+  --button-hover-main: light-dark(var(--light-button-hover-main), var(--dark-button-hover-main));
+
+  --dark-header-buttons: #dedede;
+  --light-header-buttons: #213547;
+  --header-buttons: light-dark(var(--light-header-buttons), var(--dark-header-buttons));
+
+  --dark-table-cell: #464646;               /* rgb(70, 70, 70) */
+  --light-table-cell: #e4e4e439;
+  --table-cell-color: light-dark(var(--light-table-cell), var(--dark-table-cell));
+}
+
+:root:has(option[id="theme-system"]:checked) {
+  color-scheme: light dark;
+  background-color: light-dark(var(--light-bg), var(--dark-bg));
+
+}
+
+:root:has(option[id="theme-light"]:checked) {
+  color-scheme: light;
+}
+
+:root:has(option[id="theme-dark"]:checked) {
+  color-scheme: dark;
+  color: #e0e0e0;
+  background: var(--dark-bg);
+}
 
 #app {
   font-weight: normal;
@@ -30,6 +66,9 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
+  font-weight: normal;
+  padding: 0;
+
 }
 
 body {
@@ -45,20 +84,35 @@ body {
 
 h1 {
   font-size: clamp(36px, 4vw + 24px, 76px);
-  line-height: 1.1;
   font-weight: 900;
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 0;
+  line-height: 1.25;
+}
+:root:has(option[id="theme-dark"]:checked) h1,
+:root:has(option[id="theme-system"]:checked) h1 {
+  background: linear-gradient(315deg, #42d392 25%, #647eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h3 {
   font-weight: 600;
 }
+ul {
+  list-style: none;
+}
+
 
 ul {
   padding: 0;
 }
 input:focus{
   outline: none;
+
+a {
+  text-decoration: none;
+  color: inherit;
+
 }

@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <section class="hero">
-    <h1>The <span class="highlight">Progressive</span> <br> JavaScript Framework</h1>
-    <p class="hero-text">An approachable, performant and versatile framework for building web user interfaces.</p>
+    <h1>The <span class="highlight">{{ t('heroTitle.part1') }}</span> <br>{{ t('heroTitle.part2') }}</h1>
+    <p class="hero-text">{{ t('heroText') }}</p>
     <div class="hero-buttons">
       <button class="btn btn-green">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,16 +21,16 @@
             <rect x="-1" y="-1" width="24" height="24" fill="currentColor"/>
           </g>
         </svg>
-        Why Vue
+        {{ t('whyVue') }}
       </button>
       <button class="btn btn-icon-right">
-        Get Started
+        {{ t('getStarted') }}
         <svg width="10" height="10" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.420078 6.58002L12.6701 6.58002L7.42008 1.33002L8.08008 0.580017L14.5801 7.08002L8.08008 13.58L7.42008 12.83L12.6701 7.58002L0.420078 7.58002L0.420078 6.58002Z" fill="#476582"/>
         </svg>
       </button>
-      <button class="btn">Install</button>
-      <button class="btn btn-gradient">Get Security Updates for Vue2
+      <button class="btn">{{ t('install') }}</button>
+      <button class="btn btn-gradient">{{ t('getSecurityUpdates') }}
         <svg width="12" height="12" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.5 8.5L19 1M19 1H14M19 1V6M19 12V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H8" stroke="#476582" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -69,8 +72,9 @@
   border: none;
   cursor: pointer;
   margin-right: 18px;
-  color: rgba(71, 101, 130, 1);
+  color: var(--button-text-color);
   white-space: nowrap;
+  background-color: var(--secondary-bg-color);
 }
 
 .btn:last-child {
@@ -79,23 +83,22 @@
 
 .btn-green {
   background-color: rgba(66, 184, 131, 1);
-  color: white;
+  color: light-dark(white, var(--light-text));
 }
 
 .btn-green:hover {
   background-color: #2d8867;
 }
 
+:root:has(option[id="theme-system"]:checked) .btn:not(.btn-green):hover,
+:root:has(option[id="theme-dark"]:checked) .btn:not(.btn-green):hover{
+  background-color: rgba(70, 70, 70, 0.66);
+}
+
 .btn-gradient {
-  background: radial-gradient(circle at 100% 100%, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 0% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 0 100%, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 100% 0%/8px 8px no-repeat,
-  radial-gradient(circle at 100% 0, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 0% 100%/8px 8px no-repeat,
-  radial-gradient(circle at 0 0, #f1f1f1 0, #f1f1f1 6px, transparent 6px) 100% 100%/8px 8px no-repeat,
-  linear-gradient(#f1f1f1, #f1f1f1) 50% 50%/calc(100% - 4px) calc(100% - 16px) no-repeat,
-  linear-gradient(#f1f1f1, #f1f1f1) 50% 50%/calc(100% - 16px) calc(100% - 4px) no-repeat,
-  linear-gradient(146deg, #45cf98 0%, #6481fb 100%);
-  border-radius: 8px;
-  box-sizing: border-box;
+  background: linear-gradient(var(--button-linear), var(--button-linear)) padding-box,
+  linear-gradient(45deg, #42d392, #647eff) border-box;
+  border: 2px solid transparent;
 }
 
 .btn-icon-right img {

@@ -9,7 +9,7 @@
 
 <style scoped>
 .footer-content {
-  background-color: rgba(228, 228, 228, 0.226);
+  background-color: var(--bg);
   padding: 24px;
   font-size: 12px;
   color: #333;

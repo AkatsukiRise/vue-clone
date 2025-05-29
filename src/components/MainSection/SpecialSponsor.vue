@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { characteristics } from '@/data.ts'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 <template>
   <section class="special-sponsor">
@@ -16,14 +18,22 @@ import { characteristics } from '@/data.ts'
       />
     </a>
     <span class="text text-container-right">
-      Official Vue & Nuxt Partner
+       {{ t('officialPartner') }}
     </span>
   </section>
 
   <section class="char-container">
-    <div v-for="(char, index) in characteristics" :key="index" class="char-item">
-      <h3>{{ char.title }}</h3>
-      <p class="char-p">{{ char.description }}</p>
+    <div class="char-item">
+      <h3>{{ t('characteristics.accessible.title') }}</h3>
+      <p class="char-p">{{ t('characteristics.accessible.description') }}</p>
+    </div>
+    <div class="char-item">
+      <h3>{{ t('characteristics.performant.title') }}</h3>
+      <p class="char-p">{{ t('characteristics.performant.description') }}</p>
+    </div>
+    <div class="char-item">
+      <h3>{{ t('characteristics.versatile.title') }}</h3>
+      <p class="char-p">{{ t('characteristics.versatile.description') }}</p>
     </div>
   </section>
 
@@ -31,8 +41,8 @@ import { characteristics } from '@/data.ts'
 
 <style scoped>
 .special-sponsor {
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   padding: 12px 24px;
   display: flex;
   align-items: center;
@@ -43,6 +53,9 @@ import { characteristics } from '@/data.ts'
   width: 168px;
   height: 42px;
   margin: 0 10px;
+}
+:root:has(option[id="theme-system"]:checked) .image-container {
+  filter: grayscale(1) invert(1);
 }
 
 .text {
@@ -61,8 +74,8 @@ import { characteristics } from '@/data.ts'
 }
 
 .char-p {
-  margin: 0;
-  color: #adadad;
+  margin: 10px 0;
+  color: #7a7a7a;
 }
 
 .char-item {

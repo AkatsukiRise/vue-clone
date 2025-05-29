@@ -1,30 +1,3 @@
-export interface Characteristic {
-  id: string
-  title: string
-  description: string
-}
-
-export const characteristics: Characteristic[] = [
-  {
-    id: 'accessible',
-    title: 'Approachable',
-    description:
-      'Builds on top of standard HTML, CSS and JavaScript with intuitive API and world-class documentation.',
-  },
-  {
-    id: 'performant',
-    title: 'Performant',
-    description:
-      'Truly reactive, compiler-optimized rendering system that rarely requires manual optimization.',
-  },
-  {
-    id: 'versatile',
-    title: 'Versatile',
-    description:
-      'A rich, incrementally adoptable ecosystem that scales between a library and a full-featured framework.',
-  },
-]
-
 export const platinumSponsors: string[] = [
   "BIT",
   "Vue Mastery",
@@ -57,153 +30,84 @@ export const goldSponsors: string[] = [
   "JavaScript",
   "Become a sponsor"
 ];
-export interface SiteMapLink {
-  key: string;
-}
 
-export interface SiteMapCategory {
-  id: string;
-  links: SiteMapLink[];
-}
 
-export const siteMapCategories = [{
-  id: "Docs",
-  links: [{
-    key: "Guide"
-  },
-    {
-      key: "Tutorial"
-    },
-    {
-      key: "Examples"
-    },
-    {
-      key: "Quick start"
-    },
-    {
-      key: "Glossary"
-    },
-    {
-      key: "Error reference"
-    },
-    {
-      key: "Vue 2 docs"
-    },
-    {
-      key: "Migration from Vue 2"
-    }
-  ]
-},
+
+export const siteMapCategories = [
   {
-    id: "About",
-    links: [{
-      key: "FAQ"
-    },
-      {
-        key: "Team"
-      },
-      {
-        key: "Releases"
-      },
-      {
-        key: "Community guide"
-      },
-      {
-        key: "Code of conduct"
-      },
-      {
-        key: "Privacy policy"
-      },
-      {
-        key: "The documentary"
-      }
+    id: 'siteMap.docs.title',
+    links: [
+      { key: 'siteMap.docs.guide' },
+      { key: 'siteMap.docs.tutorial' },
+      { key: 'siteMap.docs.examples' },
+      { key: 'siteMap.docs.quick_start' },
+      { key: 'siteMap.docs.glossary' },
+      { key: 'siteMap.docs.error_reference' },
+      { key: 'siteMap.docs.vue_2_docs' },
+      { key: 'siteMap.docs.migration_from_vue_2' }
     ]
   },
   {
-    id: "Experts",
-    links: [{
-      key: "Partners"
-    },
-      {
-        key: "Developers"
-      }
+    id: 'siteMap.about.title',
+    links: [
+      { key: 'siteMap.about.faq' },
+      { key: 'siteMap.about.team' },
+      { key: 'siteMap.about.releases' },
+      { key: 'siteMap.about.community_guide' },
+      { key: 'siteMap.about.code_of_conduct' },
+      { key: 'siteMap.about.privacy_policy' },
+      { key: 'siteMap.about.the_documentary' }
     ]
   },
   {
-    id: "Resources",
-    links: [{
-      key: "Partners"
-    },
-      {
-        key: "Developers"
-      },
-      {
-        key: "Themes"
-      },
-      {
-        key: "UI components"
-      },
-      {
-        key: "Certification"
-      },
-      {
-        key: "Jobs"
-      },
-      {
-        key: "T-Shirt shop"
-      }
+    id: 'siteMap.experts.title',
+    links: [
+      { key: 'siteMap.experts.partners' },
+      { key: 'siteMap.experts.developers' }
     ]
   },
   {
-    id: "Official libraries",
-    links: [{
-      key: "Vue router"
-    },
-      {
-        key: "Pinia"
-      },
-      {
-        key: "Tooling guide"
-      }
+    id: 'siteMap.resources.title',
+    links: [
+      { key: 'siteMap.resources.partners' },
+      { key: 'siteMap.resources.developers' },
+      { key: 'siteMap.resources.themes' },
+      { key: 'siteMap.resources.ui_components' },
+      { key: 'siteMap.resources.certification' },
+      { key: 'siteMap.resources.jobs' },
+      { key: 'siteMap.resources.t_shirt_shop' }
     ]
   },
   {
-    id: "Video courses",
-    links: [{
-      key: "Vue mastery"
-    },
-      {
-        key: "Vue school"
-      }
+    id: 'siteMap.officiallibraries.title',
+    links: [
+      { key: 'siteMap.officiallibraries.vue_router' },
+      { key: 'siteMap.officiallibraries.pinia' },
+      { key: 'siteMap.officiallibraries.tooling_guide' }
     ]
   },
   {
-    id: "Help",
-    links: [{
-      key: "Discord chat"
-    },
-      {
-        key: "Github discussions"
-      },
-      {
-        key: "Dev community"
-      }
+    id: 'siteMap.videocourses.title',
+    links: [
+      { key: 'siteMap.videocourses.vue_mastery' },
+      { key: 'siteMap.videocourses.vue_school' }
     ]
   },
   {
-    id: "News",
-    links: [{
-      key: "Blog"
-    },
-      {
-        key: "Twitter"
-      },
-      {
-        key: "Events"
-      },
-      {
-        key: "News letters"
-      }
+    id: 'siteMap.help.title',
+    links: [
+      { key: 'siteMap.help.discord_chat' },
+      { key: 'siteMap.help.github_discussions' },
+      { key: 'siteMap.help.dev_community' }
+    ]
+  },
+  {
+    id: 'siteMap.news.title',
+    links: [
+      { key: 'siteMap.news.blog' },
+      { key: 'siteMap.news.twitter' },
+      { key: 'siteMap.news.events' },
+      { key: 'siteMap.news.newsletters' }
     ]
   }
-];
+]
