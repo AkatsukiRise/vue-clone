@@ -7,6 +7,8 @@ function toggleLang() {
   locale.value = locale.value === 'en' ? 'it' : 'en'
 }
 
+import { RouterLink } from 'vue-router'
+
 const isPopupOpen = ref(false)
 
 function togglePopup() {
@@ -74,7 +76,7 @@ function saveTheme() {
                 <li><a href="#">Migration from Vue 2</a></li>
               </ul>
             </li>
-            <li><a href="#">{{ t('nav.api') }}</a></li>
+            <li><RouterLink to="/api">{{ t('nav.api') }}</RouterLink></li>
             <li><a href="#">{{ t('nav.playground') }}</a></li>
             <li class="dropdown">
               <a href="#">{{ t('nav.ecosystem') }}</a>
