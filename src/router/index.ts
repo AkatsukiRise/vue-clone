@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/components/HomePage.vue'
-import ToDoList from '@/components/MainSection/TodoList.vue'
+import ApiPage from '@/components/MainSection/Api-page.vue'
 
 
 const routes = [
@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/api',
     name: 'ToDo',
-    component: ToDoList,
+    component: ApiPage,
   },
 ]
 
