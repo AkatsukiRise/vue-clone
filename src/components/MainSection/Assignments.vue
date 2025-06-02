@@ -1,12 +1,26 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import AssignmentList from './AssignmentList.vue'
 
-const assignments = ref([
-  { id: 1, name: 'Finish project', description: 'Main client task', complete: false },
-  { id: 2, name: "Don't die", description: 'Remember to breathe', complete: false },
-  { id: 3, name: 'Learn Vue', description: 'Study Composition API', complete: false }
-])
+export type Task = {
+  id: number
+  title: string
+  description: string
+  complete: boolean
+}
+
+const assignments = ref<Task[]>([])
+onMounted(async () => {
+  const res = await fetch('http://localhost:3000/tasks')
+  const data: any[]= await res.json()
+  assignments.value = data.map((item) => ({
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    complete: item.complete
+  }))
+})
+
 
 const completedAssignments = computed(() => {
   return assignments.value.filter(a => a.complete)
@@ -18,17 +32,32 @@ const inProgressAssignments = computed(() => {
 const newAssignment = ref('')
 const newDescription = ref('')
 
-function addAssignment() {
+async function addAssignment() {
   if (!newAssignment.value.trim()) return
 
-  assignments.value.push({
-    id: assignments.value.length + 1,
-    name: newAssignment.value,
+  const newTask = {
+    title: newAssignment.value,
     description: newDescription.value,
-    complete: false,
-  })
-  newAssignment.value = ''
-  newDescription.value = ''
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTask),
+    })
+    const createdTask = await response.json()
+    assignments.value.push(createdTask)
+
+    newAssignment.value = ''
+    newDescription.value = ''
+
+  } catch (error){
+    console.error('error!', error)
+  }
+
 }
 
 function deleteAssignment(id: number){

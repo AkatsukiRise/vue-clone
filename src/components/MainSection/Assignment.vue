@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const props = defineProps<{
-  assignment: { id: number; name: string; description: string; complete: boolean }
+  assignment: { id: number; title: string; description: string; complete: boolean }
 }>()
 
 const emit = defineEmits<{
@@ -9,20 +10,71 @@ const emit = defineEmits<{
 }>()
 
 const isEditing = ref(false)
-const editedName = ref(props.assignment.name)
+const editedName = ref(props.assignment.title)
 const editedDescription = ref(props.assignment.description)
 
-function saveEdits(){
-  props.assignment.name = editedName.value
-  props.assignment.description = editedDescription.value
-  isEditing.value = false
+async function saveEdits(){
+  const updatedTask = {
+    title: editedName.value,
+    description: editedDescription.value,
+    complete: props.assignment.complete,
+  }
+
+  try {
+    const response = await fetch(`http://localhost:3000/tasks/${props.assignment.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedTask),
+    })
+    props.assignment.title = editedName.value
+    props.assignment.description = editedDescription.value
+
+    isEditing.value = false
+  }
+  catch (error) {
+    console.error('error', error)
+  }
 }
+
+async function partialUpdateTask(field: {complete: boolean}){
+  try {
+    const response = await fetch(`http://localhost:3000/tasks/${props.assignment.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(field),
+    })
+
+    props.assignment.complete = field.complete
+  } catch (error) {
+    console.error('erroreeee!', error)
+  }
+}
+
+function onPartChange(){
+  partialUpdateTask({ complete: props.assignment.complete })
+}
+
+async function deleteTask() {
+  try {
+    await fetch(`http://localhost:3000/tasks/${props.assignment.id}`, {
+      method: 'DELETE',
+    })
+    emit('delete', props.assignment.id)
+  } catch (error) {
+    console.error('error!!', error)
+  }
+}
+
 </script>
 
 <template>
   <li class="assignment">
     <div class="text" v-if="!isEditing">
-      <span :class="{ done: assignment.complete }">{{ assignment.name }}</span>
+      <span :class="{ done: assignment.complete }">{{ assignment.title }}</span>
       <p v-if="assignment.description" class="description" :class="{ done: assignment.complete }">{{ assignment.description }}</p>
     </div>
 
@@ -30,10 +82,10 @@ function saveEdits(){
       <input v-model="editedName" >
       <input v-model="editedDescription" >
     </div>
-    <input type="checkbox" v-model="assignment.complete" />
+    <input type="checkbox" v-model="assignment.complete" @change="onPartChange" />
     <button v-if="!isEditing" @click="isEditing = true">✏️</button>
     <button v-else @click="saveEdits">✅</button>
-    <button @click="$emit('delete', assignment.id)">❌</button>
+    <button @click="deleteTask">❌</button>
   </li>
 </template>
 

@@ -15,9 +15,10 @@
 
 <script setup lang="ts">
 import Assignment from './Assignment.vue'
+import type { Task } from '@/components/MainSection/Assignments.vue'
 
 const props = defineProps<{
-  assignments: { id: number; name: string; complete: boolean }[];
+  assignments: Task[];
   title: string;
 }>()
 const emit = defineEmits<{
@@ -65,7 +66,6 @@ const emit = defineEmits<{
 
 .assignment-item:hover {
   background-color: rgba(92, 125, 60, 0.72);
-
 }
 
 </style>
