@@ -1,37 +1,47 @@
 <script setup lang="ts">
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-import HeroSection from '@/components/MainSection/HeroSection.vue'
-import SiteMap from '@/components/MainSection/SiteMap.vue'
-import SpecialSponsor from '@/components/MainSection/SpecialSponsor.vue'
-import SponsorsSection from '@/components/MainSection/SponsorsSection.vue'
+const router = useRouter()
+
+const authStore = useAuthStore()
+
+function onLoginSuccess() {
+  authStore.login()
+  router.push('/')
+}
+
+function onRegisterSuccess(){
+  authStore.login()
+  router.push('/')
+}
+
+function onLogout() {
+  authStore.logout()
+  window.location.reload()
+}
 </script>
 
 <template>
-  <Header />
-
-    <HeroSection />
-    <SpecialSponsor />
-    <SponsorsSection />
-    <SiteMap />
-
-  <Footer />
+  <div class="page">
+    <Header :is-logged-in="authStore.isLoggedIn" @logout="onLogout" />
+    <main class="content">
+      <router-view @login-success="onLoginSuccess" @register-success="onRegisterSuccess" />
+    </main>
+    <Footer />
+  </div>
 </template>
 
-
-
-
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-main {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-
+.content {
+  flex: 1;
+}
 </style>
