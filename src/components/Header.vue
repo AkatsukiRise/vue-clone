@@ -1,8 +1,23 @@
 <script setup lang="ts">
+
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
+
+const props = defineProps({
+  isLoggedIn: Boolean
+})
+const emit = defineEmits(['logout'])
+
+function onLogout() {
+  localStorage.removeItem('isLoggedIn')
+  emit('logout')
+}
+
+
 
 const { t, locale } = useI18n()
+
 function toggleLang() {
   locale.value = locale.value === 'en' ? 'it' : 'en'
 }
@@ -58,6 +73,11 @@ function saveTheme() {
       <div class="navigation">
         <nav>
           <ul class="nav-menu">
+            <li v-if="!isLoggedIn"><RouterLink to="/registration">Register</RouterLink></li>
+            <li v-if="!isLoggedIn"><RouterLink to="/login">Login</RouterLink></li>
+            <li v-else>
+              <button @click="onLogout">Logout</button>
+            </li>
             <li class="dropdown">
               <a href="#">{{ t('nav.docs') }}</a>
               <svg class="nav-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,8 +94,9 @@ function saveTheme() {
                 <li><a href="#">Migration from Vue 2</a></li>
               </ul>
             </li>
-            <li><a href="#">{{ t('nav.api') }}</a></li>
+            <li><RouterLink to="/api">{{ t('nav.api') }}</RouterLink></li>
             <li><a href="#">{{ t('nav.playground') }}</a></li>
+
             <li class="dropdown">
               <a href="#">{{ t('nav.ecosystem') }}</a>
               <svg class="nav-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
