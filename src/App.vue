@@ -1,39 +1,32 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 
-const isLoggedIn = ref(false)
-
-onMounted(() => {
-  isLoggedIn.value = localStorage.getItem('isLoggedIn') === 'true'
-})
+const authStore = useAuthStore()
 
 function onLoginSuccess() {
-  isLoggedIn.value = true
+  authStore.login()
   router.push('/')
-  localStorage.setItem('isLoggedIn', 'true')
 }
 
 function onRegisterSuccess(){
-  isLoggedIn.value = true
+  authStore.login()
   router.push('/')
-  localStorage.setItem('isLoggedIn', 'true')
 }
 
 function onLogout() {
-  isLoggedIn.value = false
-  localStorage.removeItem('isLoggedIn')
+  authStore.logout()
   window.location.reload()
 }
 </script>
 
 <template>
   <div class="page">
-    <Header :is-logged-in="isLoggedIn" @logout="onLogout" />
+    <Header :is-logged-in="authStore.isLoggedIn" @logout="onLogout" />
     <main class="content">
       <router-view @login-success="onLoginSuccess" @register-success="onRegisterSuccess" />
     </main>
